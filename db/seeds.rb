@@ -6,6 +6,9 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
+Airport.delete_all
+Flight.delete_all
+
 Airport.create(code: "VCA")
 Airport.create(code: "DAD")
 Airport.create(code: "HPH")
@@ -15,3 +18,7 @@ Airport.create(code: "CXR")
 Airport.create(code: "PQC")
 Airport.create(code: "VII")
 Airport.create(code: "HUI")
+
+Flight.create(departure_airport_id: 1, arrival_airport_id: 2)
+Flight.create(departure_airport_id: 4, arrival_airport_id: 1)
+Flight.create(departure_airport_id: 7, arrival_airport_id: 1)

@@ -1,0 +1,32 @@
+<%= form_with url: flights_path, method: :get do |form| %>
+  <%= form.label :departure_airport_id, "Departure Airport:" %>
+  <select name="departure_airport_id">
+    <%= @airports.each do |airport| %>
+      <option value="<%= airport.id %>"><%= airport.code %></option>
+    <% end %>
+  </select>
+
+  <%= form.label :arrival_airport_id, "Arrival Airport:" %>
+  <select name="arrival_airport_id">
+    <%= @airports.each do |airport| %>
+      <option value="<%= airport.id %>"><%= airport.code %></option>
+    <% end %>
+  </select>
+
+  <%= form.label :passengers, "Number of passengers:" %>
+  <select name="passengers">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+  </select>
+
+  <%= form.label :date, "Date:" %>
+  <select name="start_date">
+    <%= @flights.each do |flight| %>
+      <option value="<%= flight.start.to_date %>"><%= flight.start.to_date %></option>
+    <% end %>
+  </select>
+
+  <%= form.submit "Search" %>
+<% end %>

@@ -2,14 +2,22 @@
   <%= form.label :departure_airport_id, "Departure Airport:" %>
   <select name="departure_airport_id">
     <%= @airports.each do |airport| %>
-      <option value="<%= airport.id %>"><%= airport.code %></option>
+      <% if params[:departure_airport_id].to_i == airport.id %>
+        <option value="<%= airport.id %>" selected><%= airport.code %></option>
+      <% else %>
+        <option value="<%= airport.id %>"><%= airport.code %></option>
+      <% end %>
     <% end %>
   </select>
 
   <%= form.label :arrival_airport_id, "Arrival Airport:" %>
   <select name="arrival_airport_id">
     <%= @airports.each do |airport| %>
-      <option value="<%= airport.id %>"><%= airport.code %></option>
+      <% if params[:arrival_airport_id].to_i == airport.id %>
+        <option value="<%= airport.id %>" selected><%= airport.code %></option>
+      <% else %>
+        <option value="<%= airport.id %>"><%= airport.code %></option>
+      <% end %>
     <% end %>
   </select>
 
@@ -22,11 +30,37 @@
   </select>
 
   <%= form.label :date, "Date:" %>
-  <select name="start_date">
-    <%= @flights.each do |flight| %>
-      <option value="<%= flight.start.to_date %>"><%= flight.start.to_date %></option>
+  <select name="flight_date">
+    <%= @flight_dates.each do |flight_date| %>
+      <% if params[:flight_date].to_date == flight_date %>
+        <option value="<%= flight_date %>" selected><%= flight_date %></option>
+      <% else %>
+        <option value="<%= flight_date %>"><%= flight_date %></option>
+      <% end %>
+      
     <% end %>
   </select>
 
   <%= form.submit "Search" %>
 <% end %>
+
+<table>
+  <tr>
+    <th>Departure Airport</th>
+    <th>Arrival Aiport</th>
+    <th>Flight_Date</th>
+    <th>Flight_time</th>
+    <th>Duration</th>
+  </tr>
+
+  <% @flights.each do |flight| %>
+    <tr>
+      <td><%= flight.departure_airport.code %></td>
+      <td><%= flight.arrival_airport.code %></td>
+      <td><%= flight.flight_date %></td>
+      <td><%= flight.flight_time %></td>
+      <td><%= flight.duration %></td>
+    </tr>
+  <% end %>
+</table>
+

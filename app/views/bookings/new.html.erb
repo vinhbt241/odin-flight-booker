@@ -1,0 +1,29 @@
+<table>
+  <tr>
+    <th>Departure Airport</th>
+    <th>Arrival Aiport</th>
+    <th>Flight_Date</th>
+    <th>Flight_time</th>
+    <th>Duration</th>
+  </tr>
+
+  <td><%= @flight.departure_airport.code %></td>
+  <td><%= @flight.arrival_airport.code %></td>
+  <td><%= @flight.flight_date %></td>
+  <td><%= @flight.flight_time %></td>
+  <td><%= @flight.duration %></td>
+</table>
+
+<br>
+
+<%= form_with model: @booking do |booking_form| %>
+  <%= booking_form.fields_for :passengers do |passenger_form| %>
+    <%= passenger_form.label :name, "Name:" %>
+    <%= passenger_form.text_field :name %><br>
+    <%= passenger_form.label :email, "Email:" %>
+    <%= passenger_form.email_field :email %><br>
+    <br>
+  <% end %>
+
+  <%= booking_form.submit "Book Flight" %>
+<% end %>

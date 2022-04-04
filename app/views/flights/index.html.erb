@@ -21,19 +21,30 @@
     <% end %>
   </select>
 
-  <%= form.label :passengers, "Number of passengers:" %>
-  <select name="passengers">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
+  <%= form.label :num_of_passengers, "Number of passengers:" %>
+  <select name="num_of_passengers">
+    <% 4.times do |i| %>
+      <% if params.has_key?(:num_of_passengers) %>
+        <% if params[:num_of_passengers].to_i == i + 1 %>
+          <option value="<%= i + 1 %>" selected><%= i + 1 %></option>
+        <% else %>
+          <option value="<%= i + 1 %>"><%= i + 1 %></option>
+        <% end %>
+      <% else %>
+        <option value="<%= i + 1 %>"><%= i + 1 %></option>
+      <% end %>
+    <% end %>
   </select>
 
   <%= form.label :date, "Date:" %>
   <select name="flight_date">
     <%= @flight_dates.each do |flight_date| %>
-      <% if params[:flight_date].to_date == flight_date %>
-        <option value="<%= flight_date %>" selected><%= flight_date %></option>
+      <% if params.has_key?(:flight_date) %>
+        <% if params[:flight_date].to_date == flight_date %>
+          <option value="<%= flight_date %>" selected><%= flight_date %></option>
+        <% else %>
+          <option value="<%= flight_date %>"><%= flight_date %></option>
+        <% end %>
       <% else %>
         <option value="<%= flight_date %>"><%= flight_date %></option>
       <% end %>
@@ -55,11 +66,17 @@
 
   <% @flights.each do |flight| %>
     <tr>
-      <td><%= flight.departure_airport.code %></td>
-      <td><%= flight.arrival_airport.code %></td>
-      <td><%= flight.flight_date %></td>
-      <td><%= flight.flight_time %></td>
-      <td><%= flight.duration %></td>
+      <%= form_with url: new_booking_path, method: :get do |form| %>
+        <td><%= flight.departure_airport.code %></td>
+        <td><%= flight.arrival_airport.code %></td>
+        <td><%= flight.flight_date %></td>
+        <td><%= flight.flight_time %></td>
+        <td><%= flight.duration %></td>
+        <td><%= form.submit "Book Flight" %></td>
+
+        <%= form.hidden_field :flight_id, value: flight.id %>
+        <%= form.hidden_field :num_of_passengers, value: params[:num_of_passengers] %>
+      <% end %>
     </tr>
   <% end %>
 </table>

@@ -21,9 +21,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_04_130039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "flight_id"
-    t.integer "passenger_id"
     t.index ["flight_id"], name: "index_bookings_on_flight_id"
-    t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
   end
 
   create_table "flights", force: :cascade do |t|
@@ -41,6 +39,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_04_130039) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "booking_id"
+    t.index ["booking_id"], name: "index_passengers_on_booking_id"
   end
 
 end

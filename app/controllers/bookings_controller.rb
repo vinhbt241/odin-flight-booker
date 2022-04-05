@@ -7,6 +7,19 @@ class BookingsController < ApplicationController
   end
 
   def create 
+    @booking = Booking.new(booking_params)
 
+    if @booking.save 
+      flash.notice = "Flight from #{@booking.flight.departure_airport.code} to #{@booking.flight.arrival_airport.code} with #{@booking.passengers.length} passengers was successfully booked"
+      
+      redirect_to flights_path
+    end
   end
+
+  private
+
+  def booking_params
+    params.require(:booking).permit(:flight_id, passengers_attributes: [:name, :email])
+  end
+
 end

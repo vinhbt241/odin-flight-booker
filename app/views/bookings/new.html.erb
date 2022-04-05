@@ -24,6 +24,8 @@
     <%= passenger_form.email_field :email %><br>
     <br>
   <% end %>
+  
+  <%= booking_form.hidden_field :flight_id, value: @flight.id %>
 
   <%= booking_form.submit "Book Flight" %>
 <% end %>

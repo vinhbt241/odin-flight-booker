@@ -1,0 +1,31 @@
+<table>
+  <tr>
+    <th>Departure Airport</th>
+    <th>Arrival Airport</th>
+    <th>Flight Date</th>
+    <th>Flight Time</th>
+    <th>Duration</th>
+  </tr>
+
+  <tr>
+    <td><%= @flight.departure_airport.code %></td>
+    <td><%= @flight.arrival_airport.code %></td>
+    <td><%= @flight.flight_date %></td>
+    <td><%= @flight.flight_time %></td>
+    <td><%= @flight.duration %></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th>Passenger Name</th>
+    <th>Passenger Email</th>
+  </tr>
+
+  <% @booking.passengers.each do |passenger| %>
+    <tr>
+      <td><%= passenger.name %></td>
+      <td><%= passenger.email %></td>
+    </tr>
+  <% end %>
+</table>

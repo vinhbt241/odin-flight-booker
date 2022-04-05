@@ -12,8 +12,13 @@ class BookingsController < ApplicationController
     if @booking.save 
       flash.notice = "Flight from #{@booking.flight.departure_airport.code} to #{@booking.flight.arrival_airport.code} with #{@booking.passengers.length} passengers was successfully booked"
       
-      redirect_to flights_path
+      redirect_to booking_path(@booking)
     end
+  end
+
+  def show 
+    @booking = Booking.find(params[:id])
+    @flight = @booking.flight
   end
 
   private

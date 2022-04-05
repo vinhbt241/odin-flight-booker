@@ -1,83 +1,88 @@
-<%= form_with url: flights_path, method: :get do |form| %>
-  <%= form.label :departure_airport_id, "Departure Airport:" %>
-  <select name="departure_airport_id">
-    <%= @airports.each do |airport| %>
-      <% if params[:departure_airport_id].to_i == airport.id %>
-        <option value="<%= airport.id %>" selected><%= airport.code %></option>
-      <% else %>
-        <option value="<%= airport.id %>"><%= airport.code %></option>
-      <% end %>
-    <% end %>
-  </select>
-
-  <%= form.label :arrival_airport_id, "Arrival Airport:" %>
-  <select name="arrival_airport_id">
-    <%= @airports.each do |airport| %>
-      <% if params[:arrival_airport_id].to_i == airport.id %>
-        <option value="<%= airport.id %>" selected><%= airport.code %></option>
-      <% else %>
-        <option value="<%= airport.id %>"><%= airport.code %></option>
-      <% end %>
-    <% end %>
-  </select>
-
-  <%= form.label :num_of_passengers, "Number of passengers:" %>
-  <select name="num_of_passengers">
-    <% 4.times do |i| %>
-      <% if params.has_key?(:num_of_passengers) %>
-        <% if params[:num_of_passengers].to_i == i + 1 %>
-          <option value="<%= i + 1 %>" selected><%= i + 1 %></option>
-        <% else %>
-          <option value="<%= i + 1 %>"><%= i + 1 %></option>
+<div class="container">
+  <div class="search-form form-inline">
+    <%= form_with url: flights_path, method: :get do |form| %>
+      <%= form.label :departure_airport_id, "Departure Airport:" %>
+      <select name="departure_airport_id">
+        <%= @airports.each do |airport| %>
+          <% if params[:departure_airport_id].to_i == airport.id %>
+            <option value="<%= airport.id %>" selected><%= airport.code %></option>
+          <% else %>
+            <option value="<%= airport.id %>"><%= airport.code %></option>
+          <% end %>
         <% end %>
-      <% else %>
-        <option value="<%= i + 1 %>"><%= i + 1 %></option>
-      <% end %>
-    <% end %>
-  </select>
-
-  <%= form.label :date, "Date:" %>
-  <select name="flight_date">
-    <%= @flight_dates.each do |flight_date| %>
-      <% if params.has_key?(:flight_date) %>
-        <% if params[:flight_date].to_date == flight_date %>
-          <option value="<%= flight_date %>" selected><%= flight_date %></option>
-        <% else %>
-          <option value="<%= flight_date %>"><%= flight_date %></option>
+      </select>
+    
+      <%= form.label :arrival_airport_id, "Arrival Airport:" %>
+      <select name="arrival_airport_id">
+        <%= @airports.each do |airport| %>
+          <% if params[:arrival_airport_id].to_i == airport.id %>
+            <option value="<%= airport.id %>" selected><%= airport.code %></option>
+          <% else %>
+            <option value="<%= airport.id %>"><%= airport.code %></option>
+          <% end %>
         <% end %>
-      <% else %>
-        <option value="<%= flight_date %>"><%= flight_date %></option>
-      <% end %>
-      
+      </select>
+    
+      <%= form.label :num_of_passengers, "Number of passengers:" %>
+      <select name="num_of_passengers">
+        <% 4.times do |i| %>
+          <% if params.has_key?(:num_of_passengers) %>
+            <% if params[:num_of_passengers].to_i == i + 1 %>
+              <option value="<%= i + 1 %>" selected><%= i + 1 %></option>
+            <% else %>
+              <option value="<%= i + 1 %>"><%= i + 1 %></option>
+            <% end %>
+          <% else %>
+            <option value="<%= i + 1 %>"><%= i + 1 %></option>
+          <% end %>
+        <% end %>
+      </select>
+    
+      <%= form.label :date, "Date:" %>
+      <select name="flight_date">
+        <%= @flight_dates.each do |flight_date| %>
+          <% if params.has_key?(:flight_date) %>
+            <% if params[:flight_date].to_date == flight_date %>
+              <option value="<%= flight_date %>" selected><%= flight_date %></option>
+            <% else %>
+              <option value="<%= flight_date %>"><%= flight_date %></option>
+            <% end %>
+          <% else %>
+            <option value="<%= flight_date %>"><%= flight_date %></option>
+          <% end %>
+    
+        <% end %>
+      </select>
+    
+      <%= form.submit "Search" %>
     <% end %>
-  </select>
-
-  <%= form.submit "Search" %>
-<% end %>
-
-<table>
-  <tr>
-    <th>Departure Airport</th>
-    <th>Arrival Aiport</th>
-    <th>Flight Date</th>
-    <th>Flight time</th>
-    <th>Duration</th>
-  </tr>
-
-  <% @flights.each do |flight| %>
+  </div>
+  
+  <table class="table">
     <tr>
-      <%= form_with url: new_booking_path, method: :get do |form| %>
-        <td><%= flight.departure_airport.code %></td>
-        <td><%= flight.arrival_airport.code %></td>
-        <td><%= flight.flight_date %></td>
-        <td><%= flight.flight_time %></td>
-        <td><%= flight.duration %></td>
-        <td><%= form.submit "Book Flight" %></td>
-
-        <%= form.hidden_field :flight_id, value: flight.id %>
-        <%= form.hidden_field :num_of_passengers, value: params[:num_of_passengers] %>
-      <% end %>
+      <th scope="col">Departure Airport</th>
+      <th scope="col">Arrival Aiport</th>
+      <th scope="col">Flight Date</th>
+      <th scope="col">Flight time</th>
+      <th scope="col">Duration</th>
+      <th scope="col">Book Link</th>
     </tr>
-  <% end %>
-</table>
+  
+    <% @flights.each do |flight| %>
+      <tr>
+        <%= form_with url: new_booking_path, method: :get do |form| %>
+          <td><%= flight.departure_airport.code %></td>
+          <td><%= flight.arrival_airport.code %></td>
+          <td><%= flight.flight_date %></td>
+          <td><%= flight.flight_time %></td>
+          <td><%= flight.duration %></td>
+          <td><%= form.submit "Book Flight" %></td>
+  
+          <%= form.hidden_field :flight_id, value: flight.id %>
+          <%= form.hidden_field :num_of_passengers, value: params[:num_of_passengers] %>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+</div>
 

@@ -10,4 +10,4 @@ To get familiar with nested forms
 This app was developed with Ruby On Rails
 
 ## Live Preview
-You can see full functionality of the app [here]()
+You can see full functionality of the app [here](https://shielded-temple-92722.herokuapp.com/)

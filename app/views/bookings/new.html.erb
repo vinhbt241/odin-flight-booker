@@ -1,29 +1,38 @@
 <div class="container">
+  <h1>Flight Information</h1>
+
+  <br>
+
   <table class="table">
     <tr>
       <th scope="col">Departure Airport</th>
       <th scope="col">Arrival Aiport</th>
-      <th scope="col">Flight_Date</th>
-      <th scope="col">Flight_time</th>
+      <th scope="col">Flight Date</th>
+      <th scope="col">Flight time</th>
       <th scope="col">Duration</th>
     </tr>
   
     <td><%= @flight.departure_airport.code %></td>
     <td><%= @flight.arrival_airport.code %></td>
     <td><%= @flight.flight_date %></td>
-    <td><%= @flight.flight_time %></td>
-    <td><%= @flight.duration %></td>
+    <td><%= @flight.flight_time.strftime("%I:%M %p") %></td>
+    <td><%= @flight.duration %> Hours</td>
   </table>
   
   <br>
   
+  <h1>Passenger Information</h1>
+
+  <br>
+
   <%= form_with model: @booking do |booking_form| %>
     <%= booking_form.fields_for :passengers do |passenger_form| %>
-      <%= passenger_form.label :name, "Name:" %>
-      <%= passenger_form.text_field :name %>
-      <%= passenger_form.label :email, "Email:" %>
-      <%= passenger_form.email_field :email %>
-      <br>
+      <div class="passenger-form">
+        <%= passenger_form.label :name, "Name:" %>
+        <%= passenger_form.text_field :name %>
+        <%= passenger_form.label :email, "Email:" %>
+        <%= passenger_form.email_field :email %>
+      </div>
     <% end %>
   
     <%= booking_form.hidden_field :flight_id, value: @flight.id %>

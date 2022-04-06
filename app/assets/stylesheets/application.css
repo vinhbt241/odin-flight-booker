@@ -20,6 +20,7 @@
   background-image: linear-gradient(#5f87de, #02c0fe);
   background-repeat: no-repeat;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-size: 24px;
@@ -27,7 +28,7 @@
 
  .container {
   width: 70vw;
-  height: 500px;
+  height: 85vh;
   text-align: center;
  }
 
@@ -37,4 +38,14 @@
 
  .container table {
    overflow: auto;
+ }
+
+ .passenger-form {
+   margin-bottom: 20px;
+ }
+
+ .passenger-form input {
+   border-radius: 7px;
+   border: 1px solid black;
+   padding: 5px 10px;
  }

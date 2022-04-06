@@ -74,8 +74,8 @@
           <td><%= flight.departure_airport.code %></td>
           <td><%= flight.arrival_airport.code %></td>
           <td><%= flight.flight_date %></td>
-          <td><%= flight.flight_time %></td>
-          <td><%= flight.duration %></td>
+          <td><%= flight.flight_time.strftime("%I:%M %p") %></td>
+          <td><%= flight.duration %> Hours</td>
           <td><%= form.submit "Book Flight" %></td>
   
           <%= form.hidden_field :flight_id, value: flight.id %>

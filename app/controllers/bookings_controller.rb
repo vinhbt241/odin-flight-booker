@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
 
     if @booking.save 
-      flash.notice = "Flight from #{@booking.flight.departure_airport.code} to #{@booking.flight.arrival_airport.code} with #{@booking.passengers.length} passengers was successfully booked"
+      flash.notice = "Flight from #{@booking.flight.departure_airport.code} to #{@booking.flight.arrival_airport.code} with #{@booking.passengers.length} passengers was successfully booked!"
       
       redirect_to booking_path(@booking)
     end

@@ -1,0 +1,9 @@
+            Thank your for choosing our service
+================================================================
+Your flight was succesfully booked. Here are your flight's info:
+
+From: <%= @booking.flight.departure_airport.code %>
+To: <%= @booking.flight.arrival_airport.code %>
+At: <%= @booking.flight.flight_time.strftime("%I:%M %p") %>, <%= @booking.flight.flight_date %>
+Duration: <%= @booking.flight.duration %> Hours
+

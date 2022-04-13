@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thank your for choosing our service</h1>
+    <p>
+      Your flight was succesfully booked. Here are your flight's info:
+    </p>
+    <strong>Flight</strong><br>
+    <p>
+      From: <%= @booking.flight.departure_airport.code %><br>
+      To: <%= @booking.flight.arrival_airport.code %><br>
+      At: <%= @booking.flight.flight_time.strftime("%I:%M %p") %>, <%= @booking.flight.flight_date %><br>
+      Duration: <%= @booking.flight.duration %> Hours
+    </p>
+  </body>
+</html>

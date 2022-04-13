@@ -27,9 +27,10 @@
  }
 
  .container {
-  width: 70vw;
+  width: 90vw;
   height: 85vh;
   text-align: center;
+  background-color: yellow;
  }
 
  .container .search-form {
@@ -49,4 +50,11 @@
    border-radius: 7px;
    border: 1px solid black;
    padding: 5px 10px;
+ }
+
+ .search-form {
+   display: flex;
+   justify-content: center;
+   width: 100%;
+   background-color: red;
  }
